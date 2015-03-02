@@ -6,7 +6,7 @@
 
 'use strict';
 
-var Cookie;
+var cookie;
 
 
 /**
@@ -25,7 +25,7 @@ var Cookie;
  */
 var decode = decodeURIComponent;
 var encode = encodeURIComponent;
-Cookie = {
+cookie = {
   /**
    * 设置一个cookie
    * @param key {String} cookie的名字
@@ -37,9 +37,10 @@ Cookie = {
    *     secure {Boolean} 是否使用HTTPS方式
    * @return {Undefined}
    */
+    /*jshint maxparams:4*/
   set:function(key, value, time, params) {
     if(!time) {
-      time = 365 * 24 * 3600 * 1000;
+      time = 24 * 3600 * 1000;
     }
     var expires = new Date();
     expires.setTime(expires.getTime() + time);
@@ -66,7 +67,7 @@ Cookie = {
    */
   sets:function(object, time, params) {
     for(var i in object) {
-      r.set(i, object[i], time, params);
+      cookie.set(i, object[i], time, params);
     }
   },
   /**
@@ -103,8 +104,8 @@ Cookie = {
     params = hasParams ? params : '';
     expires.setTime(expires.getTime() - 1 * 24 * 3600 * 1000);
     for(var i = 0, l = hasParams ? len - 1 : len; i < l; i++) {
-      r.set(arguments[i], '', expires, params);
+    cookie.set(arguments[i], '', expires, params);
     }
   }
 };
-module.exports = Cookie;
+module.exports = cookie;
